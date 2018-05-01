@@ -24,6 +24,8 @@ namespace HubSpot.NET.Examples
             CompanyProperties.Example();
 
             EmailSubscriptions.Example();
+
+            Engagement.Example();
         }
     }
 }

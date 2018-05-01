@@ -6,13 +6,13 @@ namespace HubSpot.NET.Examples
 {
     public class Companies
     {
-        public static void Example()
+        public static void Example(string apiKey)
         {
             /**
              * Initialize the API with your API Key
              * You can find or generate this under Integrations -> HubSpot API key
              */
-            var api = new HubSpotApi("YOUR-API-KEY-HERE");
+            var api = new HubSpotApi(apiKey);
 
             /**
              * Create a company

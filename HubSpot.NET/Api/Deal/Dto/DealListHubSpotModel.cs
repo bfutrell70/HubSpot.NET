@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Runtime.Serialization;
-using HubSpot.NET.Api.Contact.Dto;
 using HubSpot.NET.Core.Interfaces;
 
 namespace HubSpot.NET.Api.Deal.Dto

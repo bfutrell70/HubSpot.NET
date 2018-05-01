@@ -13,17 +13,28 @@ namespace HubSpot.NET.Examples
 {
     public class Examples
     {
+        /*
+         *   Change "demo" to your API key to work with your data.
+         *   Leaving it as the default value will use HubSpot's 'demo' API key in the example methods.
+         */
+        static string _apiKey = "YOUR API KEY HERE";
+
         static void Main(string[] args)
         {
-            Deals.Example();
+            if (_apiKey == "YOUR API KEY HERE")
+            {
+                _apiKey = "demo";
+            }
 
-            Companies.Example();
+            Deals.Example(_apiKey);
 
-            Contacts.Example();
+            Companies.Example(_apiKey);
 
-            CompanyProperties.Example();
+            Contacts.Example(_apiKey);
 
-            EmailSubscriptions.Example();
+            CompanyProperties.Example(_apiKey);
+
+            EmailSubscriptions.Example(_apiKey);
         }
     }
 }

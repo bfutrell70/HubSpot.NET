@@ -12,5 +12,11 @@ namespace HubSpot.NET.Core.Interfaces
 
         DealListHubSpotModel<T> List<T>(bool includeAssociations, ListRequestOptions opts = null)
             where T : DealHubSpotModel, new();
+
+        DealListHubSpotModel<T> RecentlyCreated<T>(DealRecentRequestOptions opts = null)
+            where T : DealHubSpotModel, new();
+
+        DealListHubSpotModel<T> RecentlyUpdated<T>(DealRecentRequestOptions opts = null)
+            where T : DealHubSpotModel, new();
     }
 }

@@ -109,5 +109,66 @@ namespace HubSpot.NET.Api.Deal
 
             _client.Execute(path, method: Method.DELETE);
         }
+
+        public DealListHubSpotModel<T> RecentlyCreated<T>(DealRecentRequestOptions opts = null) where T : DealHubSpotModel, new()
+        {
+
+            if (opts == null)
+            {
+                opts = new DealRecentRequestOptions();
+            }
+
+            var path = $"{new DealListHubSpotModel<T>().RouteBasePath}/deal/recent/created"
+                .SetQueryParam("limit", opts.Limit);
+
+            if (opts.Offset.HasValue)
+            {
+                path = path.SetQueryParam("offset", opts.Offset);
+            }
+
+            if (opts.IncludePropertyVersion)
+            {
+                path = path.SetQueryParam("includePropertyVersions", "true");
+            }
+
+            if (!string.IsNullOrEmpty(opts.Since))
+            {
+                path = path.SetQueryParam("since", opts.Since);
+            }
+
+            var data = _client.ExecuteList<DealListHubSpotModel<T>>(path, opts);
+
+            return data;
+        }
+
+        public DealListHubSpotModel<T> RecentlyUpdated<T>(DealRecentRequestOptions opts = null) where T : DealHubSpotModel, new()
+        {
+            if (opts == null)
+            {
+                opts = new DealRecentRequestOptions();
+            }
+
+            var path = $"{new DealListHubSpotModel<T>().RouteBasePath}/deal/recent/modified"
+                .SetQueryParam("limit", opts.Limit);
+
+            if (opts.Offset.HasValue)
+            {
+                path = path.SetQueryParam("offset", opts.Offset);
+            }
+
+            if (opts.IncludePropertyVersion)
+            {
+                path = path.SetQueryParam("includePropertyVersions", "true");
+            }
+
+            if (!string.IsNullOrEmpty(opts.Since))
+            {
+                path = path.SetQueryParam("since", opts.Since);
+            }
+
+            var data = _client.ExecuteList<DealListHubSpotModel<T>>(path, opts);
+
+            return data;
+        }
     }
 }

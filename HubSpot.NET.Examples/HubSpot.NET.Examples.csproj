@@ -47,7 +47,6 @@
     <Compile Include="Companies.cs" />
     <Compile Include="Deals.cs" />
     <Compile Include="Contacts.cs" />
-    <Compile Include="Engagement.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

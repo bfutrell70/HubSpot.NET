@@ -55,7 +55,7 @@ namespace HubSpot.NET.Core.Requests
                     mapped.email = value;
                 }
             }
-            
+
             return mapped;
         }
 
@@ -198,6 +198,40 @@ namespace HubSpot.NET.Core.Requests
                 // TODO use properly serialized name of prop to find it
                 var companyIdProp = dtoProps.SingleOrDefault(q => q.GetPropSerializedName() == "companyId");
                 companyIdProp?.SetValue(dto, companyIdData);
+            }
+
+            // from "brianlland"'s response to the bug in the link https://github.com/hubspot-net/HubSpot.NET/issues/20
+            if (expandoDict.TryGetValue("associations", out var associationsData))
+            {
+                var contactList = new List<long>();
+                var companyList = new List<long>();
+
+                foreach (var assoc in associationsData as ExpandoObject)
+                {
+                    if (assoc.Key == "associatedVids")
+                    {
+                        var contList = (IList<object>)assoc.Value;
+                        foreach (var co in contList)
+                        {
+                            contactList.Add((long)co);
+                        }
+                    }
+                    else if (assoc.Key == "associatedCompanyIds")
+                    {
+                        var coList = (IList<object>)assoc.Value;
+                        foreach (var co in coList)
+                        {
+                            companyList.Add((long)co);
+                        }
+                    }
+                }
+                var associations = new Api.Deal.Dto.DealHubSpotAssociations();
+                long[] contacts = contactList.ToArray();
+                long[] companies = companyList.ToArray();
+                associations.AssociatedContacts = contacts;
+                associations.AssociatedCompany = companies;
+                var associationsProp = dtoProps.SingleOrDefault(q => q.GetPropSerializedName() == "Associations");
+                associationsProp?.SetValue(dto, associations);
             }
 
             // The Properties object in the json / response data contains all the props we wish to map - if that does not exist

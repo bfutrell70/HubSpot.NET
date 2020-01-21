@@ -58,8 +58,9 @@ namespace HubSpot.NET.Api.Deal.Dto
         [DataMember(Name = "dealtype")]
         public string DealType { get; set; }
 
+        // 'set' from "brianlland"'s response to the bug in the link https://github.com/hubspot-net/HubSpot.NET/issues/20
         [IgnoreDataMember]
-        public DealHubSpotAssociations Associations { get; }
+        public DealHubSpotAssociations Associations { get; set; }
 
         public string RouteBasePath => "/deals/v1";
         public bool IsNameValue => true;
